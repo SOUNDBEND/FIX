@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彎彎腰維修 — 藍芽喇叭專業維修</title>
+<meta name="description" content="專業藍芽喇叭維修：Marshall、Bose、JBL、SONY、B&O、UE、KEF、Sennheiser、AirPods 等品牌故障排除、換電池、不開機、破音、藍芽連線異常。蝦皮與 FB 社團長期信賴維修商。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700;900&family=Bebas+Neue&display=swap">
+<style>
+  /* ============================================================
+     SOUNDFIX WORKSHOP — 工業修繕風格設計系統
+     ============================================================ */
+  :root{
+    --bg:#0e0d0b;
+    --bg-2:#15140f;
+    --paper:#f0ebe1;
+    --ink:#1a1815;
+    --ink-soft:#3a352e;
+    --line:#2a2722;
+    --line-soft:#1f1c18;
+    --accent:#ff5e1a;        /* 維修橘 */
+    --accent-soft:#ff8a5b;
+    --signal:#7fb069;        /* 通電綠 */
+    --warn:#e8c547;          /* 警示黃 */
+    --muted:#7a7468;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --font-serif:'Noto Serif TC',serif;
+    --font-display:'Bebas Neue',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--paper);
+    font-family:var(--font-serif);
+    font-weight:400;
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto}
+
+  /* 雜訊紋理覆蓋層 */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:1000;
+    opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ===== 頂部資訊條 ===== */
+  .topbar{
+    background:var(--accent);
+    color:#1a0e07;
+    font-family:var(--font-mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    border-bottom:1px solid #1a0e07;
+  }
+  .topbar-inner{
+    max-width:1400px;margin:0 auto;
+    padding:8px 24px;
+    display:flex;justify-content:space-between;align-items:center;gap:24px;
+    flex-wrap:wrap;
+  }
+  .topbar .dot{
+    display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:#1a0e07;margin-right:6px;
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{50%{opacity:.3}}
+  .topbar a{margin-left:16px;text-decoration:underline;text-underline-offset:3px}
+
+  /* ===== 導覽列 ===== */
+  .nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(14,13,11,.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1400px;margin:0 auto;
+    padding:18px 24px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .logo{
+    font-family:var(--font-mono);
+    font-size:15px;font-weight:700;letter-spacing:.08em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo-mark{color:var(--accent);font-size:18px;animation:spin 8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .logo-sub{color:var(--muted);font-weight:400;margin-left:4px}
+  .nav-links{display:flex;gap:32px;align-items:center;font-family:var(--font-mono);font-size:13px;letter-spacing:.05em}
+  .nav-links a{position:relative;padding:6px 0;transition:color .2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-links a:not(.nav-cta)::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--accent);transition:width .3s;
+  }
+  .nav-links a:not(.nav-cta):hover::after{width:100%}
+  .nav-cta{
+    background:var(--accent);color:#1a0e07!important;
+    padding:8px 16px;font-weight:700;
+    border:1px solid var(--accent);
+  }
+  .nav-cta:hover{background:transparent;color:var(--accent)!important}
+
+  /* ===== 共用區塊容器 ===== */
+  .section{padding:120px 24px;position:relative}
+  .container{max-width:1400px;margin:0 auto}
+  .section-label{
+    font-family:var(--font-mono);
+    font-size:11px;font-weight:700;letter-spacing:.2em;
+    color:var(--accent);text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .section-label::before{
+    content:"";display:inline-block;width:32px;height:1px;background:var(--accent);
+  }
+  .section-title{
+    font-family:var(--font-serif);
+    font-size:clamp(36px,5vw,64px);
+    font-weight:900;line-height:1.05;letter-spacing:-.02em;
+    margin-bottom:24px;
+  }
+  .section-title .em{color:var(--accent);font-style:italic}
+
+  /* ============================================================
+     HERO — 工程藍圖風主視覺
+     ============================================================ */
+  .hero{
+    position:relative;
+    min-height:90vh;
+    padding:80px 24px 100px;
+    display:flex;align-items:center;
+    overflow:hidden;
+    background:
+      linear-gradient(180deg,transparent 0%,var(--bg-2) 100%),
+      radial-gradient(ellipse at 70% 30%,rgba(255,94,26,.08),transparent 60%);
+  }
+  /* 藍圖網格 */
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(240,235,225,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(240,235,225,.025) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
+  }
+  .hero-inner{
+    max-width:1400px;margin:0 auto;width:100%;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:80px;align-items:center;
+    position:relative;z-index:2;
+  }
+  .hero-meta{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;
+    color:var(--muted);text-transform:uppercase;
+    margin-bottom:32px;
+    display:flex;gap:24px;flex-wrap:wrap;
+  }
+  .hero-meta span{display:flex;align-items:center;gap:8px}
+  .hero-meta span::before{
+    content:"";width:6px;height:6px;background:var(--accent);
+    display:inline-block;
+  }
+  .hero h1{
+    font-family:var(--font-serif);
+    font-size:clamp(56px,8vw,120px);
+    line-height:.95;font-weight:900;letter-spacing:-.03em;
+    margin-bottom:32px;
+  }
+  .hero h1 .line{display:block;animation:slideUp .9s cubic-bezier(.2,.8,.2,1) backwards}
+  .hero h1 .line:nth-child(2){animation-delay:.15s}
+  .hero h1 .line:nth-child(3){animation-delay:.3s;color:var(--accent);font-style:italic}
+  @keyframes slideUp{from{opacity:0;transform:translateY(40px)}}
+  .hero-lead{
+    font-size:18px;line-height:1.7;color:#d9d3c5;max-width:540px;
+    margin-bottom:40px;
+    animation:slideUp .9s cubic-bezier(.2,.8,.2,1) .5s backwards;
+  }
+  .hero-ctas{
+    display:flex;gap:16px;flex-wrap:wrap;
+    animation:slideUp .9s cubic-bezier(.2,.8,.2,1) .65s backwards;
+  }
+  .btn{
+    font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:.1em;
+    padding:18px 28px;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--paper);
+    transition:all .25s;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--accent);border-color:var(--accent);color:#1a0e07}
+  .btn-primary:hover{background:#ff7a3e;border-color:#ff7a3e;transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--paper)}
+  .btn-ghost{background:transparent;color:var(--paper)}
+  .btn-ghost:hover{background:var(--paper);color:var(--ink)}
+  .btn .arrow{transition:transform .2s}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* Hero 右側：示意圖卡 */
+  .hero-card{
+    position:relative;
+    border:1px solid var(--line);
+    background:rgba(21,20,15,.6);
+    padding:28px;
+    backdrop-filter:blur(8px);
+    animation:slideUp 1s cubic-bezier(.2,.8,.2,1) .4s backwards;
+  }
+  .hero-card::before{
+    content:"";position:absolute;top:-1px;left:-1px;width:24px;height:24px;
+    border-top:2px solid var(--accent);border-left:2px solid var(--accent);
+  }
+  .hero-card::after{
+    content:"";position:absolute;bottom:-1px;right:-1px;width:24px;height:24px;
+    border-bottom:2px solid var(--accent);border-right:2px solid var(--accent);
+  }
+  .hero-card-head{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;
+    color:var(--muted);text-transform:uppercase;
+    margin-bottom:20px;padding-bottom:16px;border-bottom:1px dashed var(--line);
+  }
+  .hero-card-head .blink{
+    width:8px;height:8px;border-radius:50%;background:var(--signal);
+    animation:pulse 1.4s ease-in-out infinite;
+  }
+  .hero-card-row{
+    display:flex;justify-content:space-between;
+    font-family:var(--font-mono);font-size:13px;
+    padding:10px 0;border-bottom:1px dashed var(--line-soft);
+  }
+  .hero-card-row span:first-child{color:var(--muted)}
+  .hero-card-row span:last-child{color:var(--paper);font-weight:500}
+  .hero-card-row .val-accent{color:var(--accent)}
+  .hero-card-foot{
+    margin-top:20px;padding:14px;background:var(--bg);
+    font-family:var(--font-mono);font-size:11px;color:var(--muted);
+    letter-spacing:.1em;text-align:center;
+    border:1px dashed var(--line);
+  }
+
+  /* ============================================================
+     MARQUEE — 跑馬燈品牌列
+     ============================================================ */
+  .marquee{
+    background:var(--paper);color:var(--ink);
+    padding:24px 0;overflow:hidden;
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  }
+  .marquee-track{
+    display:flex;gap:80px;
+    animation:marquee 30s linear infinite;
+    font-family:var(--font-display);font-size:36px;letter-spacing:.05em;
+    white-space:nowrap;
+  }
+  .marquee-track span{display:inline-flex;align-items:center;gap:80px}
+  .marquee-track span::after{content:"◉";color:var(--accent);font-size:14px}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* ============================================================
+     STATS — 數據顯示
+     ============================================================ */
+  .stats{
+    background:var(--bg-2);
+    padding:80px 24px;
+    border-bottom:1px solid var(--line);
+  }
+  .stats-grid{
+    max-width:1400px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .stats-grid-2{
+    grid-template-columns:repeat(2,1fr);
+    max-width:800px;
+  }
+  .stat{
+    background:var(--bg-2);padding:40px 32px;
+    position:relative;
+  }
+  .stat-num{
+    font-family:var(--font-display);font-size:72px;line-height:1;
+    color:var(--accent);letter-spacing:.02em;
+  }
+  .stat-unit{font-size:24px;color:var(--paper);margin-left:4px}
+  .stat-label{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;
+    color:var(--muted);text-transform:uppercase;margin-top:8px;
+  }
+  .stat-desc{
+    color:#d9d3c5;font-size:14px;margin-top:12px;line-height:1.6;
+  }
+
+  /* ============================================================
+     BRANDS — 品牌維修
+     ============================================================ */
+  .brands-head{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;
+    margin-bottom:60px;
+  }
+  .brands-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .brand-card{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    padding:32px;
+    position:relative;
+    cursor:pointer;
+    transition:all .3s cubic-bezier(.2,.8,.2,1);
+    overflow:hidden;
+  }
+  .brand-card:hover{
+    border-color:var(--accent);
+    transform:translateY(-4px);
+  }
+  .brand-card::before{
+    content:attr(data-no);
+    position:absolute;top:16px;right:20px;
+    font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:.1em;
+  }
+  .brand-badge{
+    position:absolute;top:14px;left:14px;
+    background:var(--accent);color:#1a0e07;
+    font-family:var(--font-mono);font-size:11px;font-weight:700;
+    letter-spacing:.1em;padding:4px 10px;
+  }
+  .brand-name{
+    font-family:var(--font-display);font-size:48px;letter-spacing:.04em;
+    margin-top:32px;margin-bottom:8px;line-height:1;
+  }
+  .brand-sub{
+    font-family:var(--font-mono);font-size:11px;color:var(--accent);
+    letter-spacing:.15em;text-transform:uppercase;margin-bottom:24px;
+  }
+  .brand-models{
+    font-size:14px;color:#c7c0b0;line-height:1.8;margin-bottom:24px;
+    padding-bottom:24px;border-bottom:1px dashed var(--line);
+  }
+  .brand-issues{
+    font-family:var(--font-mono);font-size:12px;color:var(--muted);
+    line-height:1.9;
+  }
+  .brand-issues b{color:var(--paper);font-weight:500;margin-right:6px}
+  .brand-card-arrow{
+    position:absolute;bottom:24px;right:28px;
+    font-family:var(--font-mono);font-size:18px;color:var(--accent);
+    opacity:0;transition:all .3s;
+  }
+  .brand-card:hover .brand-card-arrow{opacity:1;transform:translateX(4px)}
+
+  /* ============================================================
+     SERVICES — 維修項目
+     ============================================================ */
+  .services{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .services-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);margin-top:60px;
+  }
+  .service{
+    background:var(--bg-2);padding:48px;
+    position:relative;
+    transition:background .3s;
+  }
+  .service:hover{background:var(--bg)}
+  .service-no{
+    font-family:var(--font-mono);font-size:11px;color:var(--accent);
+    letter-spacing:.2em;margin-bottom:24px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .service-no::before{
+    content:"";width:24px;height:1px;background:var(--accent);
+  }
+  .service h3{
+    font-family:var(--font-serif);font-size:32px;font-weight:700;
+    line-height:1.2;margin-bottom:16px;letter-spacing:-.01em;
+  }
+  .service p{
+    color:#c7c0b0;font-size:15px;line-height:1.8;margin-bottom:20px;
+  }
+  .service-points{
+    list-style:none;font-family:var(--font-mono);font-size:13px;color:var(--muted);
+  }
+  .service-points li{
+    padding:6px 0;padding-left:20px;position:relative;
+  }
+  .service-points li::before{
+    content:"+";position:absolute;left:0;color:var(--accent);font-weight:700;
+  }
+
+  /* ============================================================
+     CASES — 維修案例
+     ============================================================ */
+  .cases-head{
+    display:flex;justify-content:space-between;align-items:end;
+    flex-wrap:wrap;gap:24px;margin-bottom:60px;
+  }
+  .cases-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  }
+  .case{
+    background:var(--paper);color:var(--ink);
+    padding:14px 14px 24px;
+    transition:transform .3s;
+    position:relative;
+  }
+  .case:nth-child(odd){transform:rotate(-.6deg)}
+  .case:nth-child(even){transform:rotate(.5deg)}
+  .case:hover{transform:rotate(0) translateY(-6px);z-index:2}
+  .case-img{
+    aspect-ratio:4/3;background:var(--ink);
+    margin-bottom:20px;position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  /* 佔位圖視覺（SVG 圖案） */
+  .case-img svg{width:100%;height:100%;display:block}
+  .case-tag{
+    position:absolute;top:12px;left:12px;z-index:2;
+    background:var(--accent);color:#1a0e07;
+    font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.1em;
+    padding:5px 10px;text-transform:uppercase;
+  }
+  .case-meta{
+    font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);
+    letter-spacing:.1em;margin-bottom:8px;text-transform:uppercase;
+    display:flex;justify-content:space-between;
+  }
+  .case-title{
+    font-family:var(--font-serif);font-size:20px;font-weight:700;
+    line-height:1.3;margin-bottom:10px;
+  }
+  .case-desc{
+    font-size:14px;color:var(--ink-soft);line-height:1.6;
+  }
+  .case-footer{
+    margin-top:16px;padding-top:14px;border-top:1px dashed #c7bda7;
+    display:flex;justify-content:space-between;
+    font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);
+  }
+  .case-footer .status{color:var(--accent);font-weight:700}
+
+  /* ============================================================
+     PROCESS — 維修流程
+     ============================================================ */
+  .process{padding:120px 24px;background:var(--bg)}
+  .process-steps{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);margin-top:60px;
+  }
+  .step{
+    background:var(--bg);padding:40px 32px;
+    position:relative;
+  }
+  .step-no{
+    font-family:var(--font-display);font-size:80px;line-height:.8;
+    color:var(--accent);margin-bottom:20px;
+  }
+  .step h4{
+    font-family:var(--font-serif);font-size:22px;font-weight:700;
+    margin-bottom:12px;
+  }
+  .step p{color:#c7c0b0;font-size:14px;line-height:1.7}
+
+  /* ============================================================
+     CONTACT CTA — 聯絡管道
+     ============================================================ */
+  .contact{
+    padding:120px 24px;
+    background:
+      radial-gradient(ellipse at 30% 50%,rgba(255,94,26,.12),transparent 60%),
+      var(--bg-2);
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  .contact-title{
+    font-family:var(--font-serif);font-size:clamp(40px,6vw,80px);
+    font-weight:900;line-height:1.05;letter-spacing:-.02em;
+    margin-bottom:24px;max-width:900px;margin-left:auto;margin-right:auto;
+  }
+  .contact-title em{color:var(--accent);font-style:italic}
+  .contact-lead{
+    font-size:17px;color:#c7c0b0;max-width:600px;margin:0 auto 48px;line-height:1.8;
+  }
+  .channels{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    max-width:900px;margin:0 auto;
+  }
+  .channels-2{
+    grid-template-columns:repeat(2,1fr);
+    max-width:680px;
+  }
+  .channel{
+    background:var(--bg);
+    border:1px solid var(--line);
+    padding:36px 24px;
+    transition:all .3s;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+  }
+  .channel:hover{
+    border-color:var(--accent);
+    transform:translateY(-4px);
+  }
+  .channel::after{
+    content:"";position:absolute;left:0;top:0;width:100%;height:3px;
+    background:var(--accent);transform:scaleX(0);transform-origin:left;
+    transition:transform .3s;
+  }
+  .channel:hover::after{transform:scaleX(1)}
+  .channel-icon{
+    font-family:var(--font-display);font-size:48px;color:var(--accent);
+    margin-bottom:16px;line-height:1;
+  }
+  .channel-name{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.15em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:8px;
+  }
+  .channel-handle{
+    font-family:var(--font-serif);font-size:22px;font-weight:700;
+    margin-bottom:8px;
+  }
+  .channel-desc{font-size:13px;color:#c7c0b0}
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer{
+    background:var(--ink);
+    padding:60px 24px 32px;
+    border-top:1px solid var(--line);
+  }
+  .footer-inner{
+    max-width:1400px;margin:0 auto;
+    display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;
+    padding-bottom:40px;border-bottom:1px solid var(--line);
+  }
+  .footer-logo{
+    font-family:var(--font-mono);font-size:16px;font-weight:700;letter-spacing:.08em;
+    margin-bottom:16px;
+  }
+  .footer-logo span{color:var(--accent)}
+  .footer-desc{color:#c7c0b0;font-size:14px;line-height:1.8;max-width:400px}
+  .footer h4{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;
+    color:var(--accent);text-transform:uppercase;margin-bottom:16px;
+  }
+  .footer p,.footer li{color:#c7c0b0;font-size:14px;line-height:2;list-style:none}
+  .footer a:hover{color:var(--accent)}
+  .footer-bottom{
+    max-width:1400px;margin:24px auto 0;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:.1em;
+    flex-wrap:wrap;gap:12px;
+  }
+
+  /* ============================================================
+     浮動聯絡按鈕（行動版好用）
+     ============================================================ */
+  .float-cta{
+    position:fixed;bottom:24px;right:24px;z-index:200;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .float-btn{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--accent);color:#1a0e07;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-size:22px;
+    box-shadow:0 8px 24px rgba(0,0,0,.5);
+    transition:transform .2s;
+    cursor:pointer;border:none;
+  }
+  .float-btn:hover{transform:scale(1.1)}
+  .float-btn.line{background:#06c755;color:#fff}
+  .float-btn.fb{background:#1877f2;color:#fff}
+  .float-btn.shopee{background:#ee4d2d;color:#fff;font-size:12px;font-weight:700}
+
+  /* ============================================================
+     響應式
+     ============================================================ */
+  @media (max-width:1024px){
+    .hero-inner{grid-template-columns:1fr;gap:48px}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .brands-grid,.cases-grid{grid-template-columns:repeat(2,1fr)}
+    .services-grid{grid-template-columns:1fr}
+    .process-steps{grid-template-columns:repeat(2,1fr)}
+    .brands-head{grid-template-columns:1fr}
+    .footer-inner{grid-template-columns:1fr;gap:40px}
+    .channels{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    .section{padding:80px 20px}
+    .nav-links a:not(.nav-cta){display:none}
+    .stats-grid,.brands-grid,.cases-grid{grid-template-columns:1fr}
+    .process-steps{grid-template-columns:1fr}
+    .service{padding:32px 24px}
+    .topbar-inner{font-size:10px;justify-content:center;text-align:center}
+    .topbar a{margin-left:10px}
+    .hero{min-height:auto;padding:60px 20px}
+    .marquee-track{font-size:28px;gap:48px}
+    .marquee-track span{gap:48px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     TOPBAR
+     ============================================================ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span><span class="dot"></span>WORKSHOP OPEN · 週一至週五 09:00–21:00</span>
+    <span>
+      私訊 →
+      <a href="https://line.me/ti/p/~pspdan092" target="_blank" rel="noopener">LINE</a>
+      <a href="https://www.facebook.com/groups/584508116613143" target="_blank" rel="noopener">FACEBOOK</a>
+      <a href="https://shopee.tw/pspdan092" target="_blank" rel="noopener">SHOPEE</a>
+    </span>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">◉</span>
+      <span>彎彎腰<span class="logo-sub">/ REPAIR</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#brands">品牌維修</a>
+      <a href="#services">維修項目</a>
+      <a href="#cases">維修案例</a>
+      <a href="#process">維修流程</a>
+      <a href="#contact" class="nav-cta">立即私訊 →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-meta">
+        <span>EST. 2022</span>
+        <span>已維修 3000+ 件</span>
+        <span>蝦皮 / FB 社團 認證</span>
+      </div>
+      <h1>
+        <span class="line">你的喇叭</span>
+        <span class="line">值得被</span>
+        <span class="line">修好。</span>
+      </h1>
+      <p class="hero-lead">
+        專業藍芽喇叭與真無線耳機維修工坊。從 Marshall Emberton 不開機、Bose Revolve+ 換電池、JBL Charge 充電孔，到 AirPods 電池更換 — 280+ 種主流型號都處理過。原蝦皮與 FB 社團指定維修商，3000+ 筆真實維修紀錄。
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">立即私訊報修 <span class="arrow">→</span></a>
+        <a href="#cases" class="btn btn-ghost">查看維修案例</a>
+      </div>
+    </div>
+
+    <!-- 工程感資訊卡 -->
+    <div class="hero-card">
+      <div class="hero-card-head">
+        <span>// WORKSHOP STATUS</span>
+        <span class="blink"></span>
+      </div>
+      <div class="hero-card-row"><span>排程時間</span><span>3–5 工作日</span></div>
+      <div class="hero-card-row"><span>檢測費用</span><span>免費 ( 不修不收 )</span></div>
+      <div class="hero-card-row"><span>保固</span><span>維修後 3 個月</span></div>
+      <div class="hero-card-foot">
+        →  私訊提供型號 + 故障狀況 即可線上估價
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARQUEE
+     ============================================================ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>MARSHALL · BOSE · AIRPODS · B&amp;O · UE · JBL · KEF · SENNHEISER · SONY · SOUNDCORE · BEATS · JABRA · TRONSMART · DEVIALET · </span>
+    <span>MARSHALL · BOSE · AIRPODS · B&amp;O · UE · JBL · KEF · SENNHEISER · SONY · SOUNDCORE · BEATS · JABRA · TRONSMART · DEVIALET · </span>
+  </div>
+</div>
+
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat">
+      <div><span class="stat-num">3047</span></div>
+      <div class="stat-label">// 累計維修紀錄</div>
+      <div class="stat-desc">2022.02 至今真實案件</div>
+    </div>
+    <div class="stat">
+      <div><span class="stat-num">280</span><span class="stat-unit">+</span></div>
+      <div class="stat-label">// 涵蓋型號</div>
+      <div class="stat-desc">主流品牌幾乎全收</div>
+    </div>
+    <div class="stat">
+      <div><span class="stat-num">3–5</span></div>
+      <div class="stat-label">// 工作日完修</div>
+      <div class="stat-desc">急件可加快處理</div>
+    </div>
+    <div class="stat">
+      <div><span class="stat-num">90</span><span class="stat-unit">天</span></div>
+      <div class="stat-label">// 維修後保固</div>
+      <div class="stat-desc">同一故障再修免費</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BRANDS
+     ============================================================ -->
+<section class="section" id="brands">
+  <div class="container">
+    <div class="brands-head">
+      <div>
+        <div class="section-label">01 / Brand Repair</div>
+        <h2 class="section-title">主修品牌 <span class="em">與常見故障</span></h2>
+      </div>
+      <p style="color:#c7c0b0;font-size:16px;line-height:1.8;max-width:480px">
+        以下是工坊最常處理的品牌與型號。若你的品牌不在清單內也歡迎詢問 — 大部分藍芽喇叭原理相通，只要還能拆都有機會救回。
+      </p>
+    </div>
+
+    <div class="brands-grid">
+
+      <div class="brand-card" data-no="// 01">
+        <div class="brand-badge">949 次</div>
+        <div class="brand-name">MARSHALL</div>
+        <div class="brand-sub">EMBERTON · STOCKWELL · KILBURN</div>
+        <div class="brand-models">Emberton I / II · Stockwell I / II · Kilburn I / II · Stanmore I / II / III · Acton II / III · Woburn I / II / III · Middleton · Tufton · Willen</div>
+        <div class="brand-issues">
+          <b>·</b>金色按鍵卡死、無反應<br>
+          <b>·</b>電池續航大幅衰退<br>
+          <b>·</b>不充電、無法供電<br>
+          <b>·</b>音量旋鈕雜訊、跳針
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 02">
+        <div class="brand-badge">444 次</div>
+        <div class="brand-name">BOSE</div>
+        <div class="brand-sub">REVOLVE · MINI · QC</div>
+        <div class="brand-models">SoundLink Revolve / Revolve+ / Revolve II · Mini I / II / II SE · Soundlink II / III · Color I / II · Flex · Portable Smart Speaker · QC / QC35</div>
+        <div class="brand-issues">
+          <b>·</b>無法開機、閃紅燈<br>
+          <b>·</b>電池膨脹、續航衰退<br>
+          <b>·</b>充電孔接觸不良<br>
+          <b>·</b>左右聲道破音
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 03">
+        <div class="brand-badge">341 次</div>
+        <div class="brand-name">AIRPODS</div>
+        <div class="brand-sub">PRO · 2 · 3 · PRO 2</div>
+        <div class="brand-models">AirPods 1 / 2 / 3 · AirPods Pro / Pro 2 · 充電盒電池更換</div>
+        <div class="brand-issues">
+          <b>·</b>單耳電池嚴重衰退<br>
+          <b>·</b>左右耳音量不平衡<br>
+          <b>·</b>充電盒無法充電<br>
+          <b>·</b>連線中斷、配對異常
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 04">
+        <div class="brand-badge">227 次</div>
+        <div class="brand-name">B&amp;O</div>
+        <div class="brand-sub">BEOPLAY · BEOLIT · E8</div>
+        <div class="brand-models">Beoplay A1 / A2 · P2 / P6 · EX / EQ · E8 / E8 2.0 / E8 3.0 / E8 Sport · Beolit 12 / 15 / 17 / 20</div>
+        <div class="brand-issues">
+          <b>·</b>電池更換<br>
+          <b>·</b>真皮頂蓋翻新<br>
+          <b>·</b>觸控失靈<br>
+          <b>·</b>充電盒故障（E8 系列）
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 05">
+        <div class="brand-badge">220 次</div>
+        <div class="brand-name">UE</div>
+        <div class="brand-sub">BOOM · MEGABOOM · WONDERBOOM</div>
+        <div class="brand-models">Boom 1 / 2 / 3 · Megaboom · Wonderboom 1 / 2 / 3</div>
+        <div class="brand-issues">
+          <b>·</b>充電孔鬆動、不充電<br>
+          <b>·</b>電池容量衰退<br>
+          <b>·</b>按鍵失靈<br>
+          <b>·</b>進水後雜音、啞音
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 06">
+        <div class="brand-badge">208 次</div>
+        <div class="brand-name">JBL</div>
+        <div class="brand-sub">CHARGE · FLIP · XTREME · PULSE</div>
+        <div class="brand-models">Charge 1 / 2 / 3 / 4 / 5 · Flip 3 / 4 / 5 / 6 · Xtreme 2 / 3 · Pulse 1 / 2 / 3 / 5 · Boombox 1 / 2 / 3 · Bar 800 · Soundbar 5.1</div>
+        <div class="brand-issues">
+          <b>·</b>Micro-USB / Type-C 鬆動<br>
+          <b>·</b>泡水後啞音、無聲<br>
+          <b>·</b>藍芽配對不上<br>
+          <b>·</b>低音破音、雜訊
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 07">
+        <div class="brand-badge">126 次</div>
+        <div class="brand-name">KEF</div>
+        <div class="brand-sub">MUO · GRAVITY ONE</div>
+        <div class="brand-models">MUO · Gravity One</div>
+        <div class="brand-issues">
+          <b>·</b>金屬中框拆解專修<br>
+          <b>·</b>電池更換<br>
+          <b>·</b>充電板維修<br>
+          <b>·</b>內部清潔保養
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 08">
+        <div class="brand-badge">113 次</div>
+        <div class="brand-name">SENNHEISER</div>
+        <div class="brand-sub">MOMENTUM TRUE WIRELESS</div>
+        <div class="brand-models">MTW 1 / 2 / 3 / 4</div>
+        <div class="brand-issues">
+          <b>·</b>耳機電池衰退<br>
+          <b>·</b>充電盒不充電<br>
+          <b>·</b>觸控失靈<br>
+          <b>·</b>單耳沒聲音
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+      <div class="brand-card" data-no="// 09">
+        <div class="brand-badge">+ 50 品牌</div>
+        <div class="brand-name">其他<br>品牌</div>
+        <div class="brand-sub">SONY · SOUNDCORE · BEATS · 等</div>
+        <div class="brand-models">Sony SRS-XB / XG / WH / WF 系列 · Anker Soundcore · Beats · Jabra · Tronsmart · GravaStar · McGee · Fender · Devialet · B&amp;W · 雜牌喇叭 · 小米電風扇</div>
+        <div class="brand-issues">
+          <b>·</b>歡迎私訊詢問<br>
+          <b>·</b>提供型號 + 故障狀況<br>
+          <b>·</b>免費線上初步診斷<br>
+          <b>·</b>不修不收費
+        </div>
+        <span class="brand-card-arrow">→</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-label">02 / Services</div>
+    <h2 class="section-title">維修項目 <span class="em">/ 處理範圍</span></h2>
+    <p style="color:#c7c0b0;font-size:16px;line-height:1.8;max-width:680px">
+      列出工坊最常見的維修類型與處理方式。實際費用依品牌、型號、零件成本而定，私訊提供照片可線上估價。
+    </p>
+
+    <div class="services-grid">
+
+      <div class="service">
+        <div class="service-no">SVC · 01 / 換電池</div>
+        <h3>電池膨脹 · 續航衰退</h3>
+        <p>原廠電池使用 2–3 年後出現續航大幅縮短、充飽僅能播放 10 分鐘、外殼鼓起變形等狀況。更換為同規格新電池，可恢復原廠水準甚至延長使用時間。</p>
+        <ul class="service-points">
+          <li>使用高規鋰電芯（含 BMS 保護板）</li>
+          <li>原廠拆解工序，不破壞外觀</li>
+          <li>更換後完整功能測試 24 小時</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="service-no">SVC · 02 / 開機故障</div>
+        <h3>無法開機 · 閃紅燈警示</h3>
+        <p>按下電源鍵無反應，或開機時持續閃紅燈不進入待機。常見原因為電源 IC 燒毀、開關按鍵接觸不良、主機板供電線路斷裂等，需要拆機檢測判定。</p>
+        <ul class="service-points">
+          <li>多點電壓檢測定位故障</li>
+          <li>BGA 晶片返焊 / 更換</li>
+          <li>恢復原廠電路設計</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="service-no">SVC · 03 / 充電孔</div>
+        <h3>充電不穩 · 接觸不良</h3>
+        <p>充電線插上沒反應、要喬角度才能充、Type-C 接孔晃動鬆脫 — 通常是長期插拔造成的接孔焊點疲勞或孔內金屬簧片變形，需要更換整個 USB 母座。</p>
+        <ul class="service-points">
+          <li>更換原規格 Type-C / Micro-USB 母座</li>
+          <li>BGA 工藝重焊主機板</li>
+          <li>強化結構防止再次脫焊</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="service-no">SVC · 04 / 聲音異常</div>
+        <h3>破音 · 雜訊 · 無聲</h3>
+        <p>大音量時破音、低音渾濁、突然單邊沒聲音，多為喇叭單體振膜破損、音圈燒毀或功率放大 IC 損壞。需依故障定位選擇單體更換或主板維修。</p>
+        <ul class="service-points">
+          <li>單體 / 音圈更換</li>
+          <li>功放 IC 替換</li>
+          <li>音質校正測試</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="service-no">SVC · 05 / 藍芽異常</div>
+        <h3>無法配對 · 連線中斷</h3>
+        <p>新手機搜尋不到、配對後一直斷線、傳輸延遲過長 — 常見原因為藍芽模組韌體錯亂、天線焊點脫落、晶片靜電損壞。多數可透過韌體重刷或模組更換修復。</p>
+        <ul class="service-points">
+          <li>韌體 / 配對紀錄重置</li>
+          <li>藍芽模組更換</li>
+          <li>天線阻抗匹配調整</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="service-no">SVC · 06 / 進水 · 摔機</div>
+        <h3>泡水搶救 · 摔機修復</h3>
+        <p>進水或摔到後不開機、聲音變調、按鍵失靈 — 越早送修救回機率越高。先做主機板超音波清洗、氧化點處理，再針對受損零件逐一替換。<b style="color:var(--accent)">進水請勿自行通電。</b></p>
+        <ul class="service-points">
+          <li>主機板超音波清洗</li>
+          <li>氧化線路修復</li>
+          <li>結構件對位重組</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CASES — 維修案例（用 SVG 佔位圖，你之後直接換成真實照片）
+     ============================================================ -->
+<section class="section" id="cases">
+  <div class="container">
+    <div class="cases-head">
+      <div>
+        <div class="section-label">03 / Repair Logs</div>
+        <h2 class="section-title">維修案例 <span class="em">/ 真實紀錄</span></h2>
+      </div>
+      <p style="color:#c7c0b0;font-size:14px;font-family:var(--font-mono);letter-spacing:.1em">
+        // 以下為過往實際維修案件，定期更新
+      </p>
+    </div>
+
+    <div class="cases-grid">
+
+      <!-- CASE 01 -->
+      <div class="case">
+        <div class="case-img">
+          <span class="case-tag">換電池</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <defs><pattern id="g1" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 20L20 0M-5 5L5 -5M15 25L25 15" stroke="#ff5e1a" stroke-width="1" opacity=".25"/></pattern></defs>
+            <rect width="400" height="300" fill="#1a1815"/>
+            <rect width="400" height="300" fill="url(#g1)"/>
+            <rect x="120" y="100" width="160" height="100" rx="8" fill="#0e0d0b" stroke="#ff5e1a" stroke-width="2"/>
+            <circle cx="155" cy="135" r="6" fill="#ff5e1a"/>
+            <rect x="180" y="128" width="80" height="14" fill="#2a2722" stroke="#ff5e1a" stroke-width="1"/>
+            <text x="200" y="180" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="13" font-weight="700">EMBERTON</text>
+          </svg>
+        </div>
+        <div class="case-meta"><span>CASE · MARSHALL</span><span>主力品項</span></div>
+        <h3 class="case-title">Marshall Emberton 換電池</h3>
+        <p class="case-desc">使用 2 年後續航嚴重縮短，滿電僅能播 30 分鐘。更換為高規鋰電芯後恢復原廠 20 小時水準。本工坊已維修近 300 顆 Emberton。</p>
+        <div class="case-footer">
+          <span>WORK · 90 MIN</span><span class="status">● COMPLETED</span>
+        </div>
+      </div>
+
+      <!-- CASE 02 -->
+      <div class="case">
+        <div class="case-img">
+          <span class="case-tag">換電池</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1a1815"/>
+            <g stroke="#ff5e1a" stroke-width="1" fill="none" opacity=".3">
+              <circle cx="200" cy="150" r="120"/><circle cx="200" cy="150" r="90"/><circle cx="200" cy="150" r="60"/>
+            </g>
+            <ellipse cx="200" cy="150" rx="55" ry="80" fill="#0e0d0b" stroke="#ff5e1a" stroke-width="2"/>
+            <ellipse cx="200" cy="150" rx="38" ry="62" fill="none" stroke="#ff5e1a" stroke-width="1" opacity=".7"/>
+            <text x="200" y="155" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="11" font-weight="700">REVOLVE+</text>
+          </svg>
+        </div>
+        <div class="case-meta"><span>CASE · BOSE</span><span>高頻案件</span></div>
+        <h3 class="case-title">Bose Revolve+ 電池更換</h3>
+        <p class="case-desc">Revolve+ 是 Bose 系列維修王者，本工坊累積 150+ 顆維修經驗。電池膨脹後若不更換可能撐破外殼，盡早送修才能保住機身完整。</p>
+        <div class="case-footer">
+          <span>WORK · 2 HOURS</span><span class="status">● COMPLETED</span>
+        </div>
+      </div>
+
+      <!-- CASE 03 -->
+      <div class="case">
+        <div class="case-img">
+          <span class="case-tag">耳機電池</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1a1815"/>
+            <g stroke="#ff5e1a" stroke-width=".5" opacity=".3">
+              <path d="M0 100H400M0 200H400"/>
+            </g>
+            <ellipse cx="155" cy="150" rx="20" ry="28" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
+            <rect x="148" y="170" width="14" height="50" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
+            <ellipse cx="245" cy="150" rx="20" ry="28" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
+            <rect x="238" y="170" width="14" height="50" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
+            <text x="200" y="265" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="11" font-weight="700">AIRPODS</text>
+          </svg>
+        </div>
+        <div class="case-meta"><span>CASE · AIRPODS</span><span>276 次經驗</span></div>
+        <h3 class="case-title">AirPods 單耳電池更換</h3>
+        <p class="case-desc">原廠 AirPods 約用 2–3 年後續航嚴重衰退，戴沒多久就斷電。專業拆解（AirPods 為超音波黏合）替換耳機本體電池芯，省去買新耳機的錢。</p>
+        <div class="case-footer">
+          <span>WORK · 2 HOURS</span><span class="status">● COMPLETED</span>
+        </div>
+      </div>
+
+      <!-- CASE 04 -->
+      <div class="case">
+        <div class="case-img">
+          <span class="case-tag">破音修復</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1a1815"/>
+            <g fill="none" stroke="#ff5e1a" stroke-width="1.5">
+              <path d="M30 150L60 130L90 170L120 100L150 200L180 80L210 220L240 90L270 210L300 110L330 190L360 140"/>
+            </g>
+            <circle cx="200" cy="150" r="60" fill="none" stroke="#ff5e1a" stroke-width="2"/>
+            <circle cx="200" cy="150" r="40" fill="none" stroke="#ff5e1a" stroke-width="1" opacity=".6"/>
+            <circle cx="200" cy="150" r="20" fill="#ff5e1a" opacity=".3"/>
+            <text x="200" y="155" text-anchor="middle" fill="#f0ebe1" font-family="JetBrains Mono" font-size="10" font-weight="700">DRIVER</text>
+          </svg>
+        </div>
+        <div class="case-meta"><span>CASE #2024-126</span><span>2025.01</span></div>
+        <h3 class="case-title">Marshall Emberton 喇叭單體更換</h3>
+        <p class="case-desc">大音量時左聲道破音，拆機後確認單體音圈變形。換上原規格單體，音質與低音量還原至出廠水準。</p>
+        <div class="case-footer">
+          <span>WORK · 2 HOURS</span><span class="status">● COMPLETED</span>
+        </div>
+      </div>
+
+      <!-- CASE 05 -->
+      <div class="case">
+        <div class="case-img">
+          <span class="case-tag">進水搶救</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1a1815"/>
+            <g fill="#ff5e1a" opacity=".7">
+              <circle cx="100" cy="80" r="3"/><circle cx="180" cy="60" r="2"/><circle cx="260" cy="90" r="4"/>
+              <circle cx="340" cy="70" r="2"/><circle cx="140" cy="130" r="3"/><circle cx="280" cy="140" r="2"/>
+              <circle cx="80" cy="200" r="4"/><circle cx="200" cy="220" r="3"/><circle cx="320" cy="210" r="2"/>
+            </g>
+            <path d="M150 150 Q200 100 250 150 T350 150" fill="none" stroke="#7fb069" stroke-width="2"/>
+            <text x="200" y="270" text-anchor="middle" fill="#7fb069" font-family="JetBrains Mono" font-size="11" font-weight="700">RECOVERED</text>
+          </svg>
+        </div>
+        <div class="case-meta"><span>CASE #2024-138</span><span>2025.02</span></div>
+        <h3 class="case-title">JBL Flip 5 海水浸泡搶救</h3>
+        <p class="case-desc">客戶於海邊不慎落水，送修時已無法開機。主機板超音波清洗 + 氧化點修補，最終成功救回正常運作。</p>
+        <div class="case-footer">
+          <span>WORK · 6 HOURS</span><span class="status">● COMPLETED</span>
+        </div>
+      </div>
+
+      <!-- CASE 06 -->
+      <div class="case">
+        <div class="case-img">
+          <span class="case-tag">藍芽模組</span>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="#1a1815"/>
+            <g stroke="#ff5e1a" stroke-width="2" fill="none">
+              <circle cx="200" cy="150" r="80" opacity=".3"/>
+              <circle cx="200" cy="150" r="55" opacity=".5"/>
+              <circle cx="200" cy="150" r="30" opacity=".8"/>
+            </g>
+            <path d="M195 110L195 190L220 165L180 135L220 105L195 130" fill="none" stroke="#ff5e1a" stroke-width="2.5"/>
+            <text x="200" y="260" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="10" font-weight="700">BT 5.0 MODULE</text>
+          </svg>
+        </div>
+        <div class="case-meta"><span>CASE #2025-014</span><span>2025.03</span></div>
+        <h3 class="case-title">Bose Revolve+ 藍芽連線異常</h3>
+        <p class="case-desc">新手機完全搜尋不到設備、舊配對裝置也斷線。重置韌體無效後更換藍芽模組，連線穩定度恢復正常。</p>
+        <div class="case-footer">
+          <span>WORK · 3 HOURS</span><span class="status">● COMPLETED</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center;margin-top:48px;color:var(--muted);font-family:var(--font-mono);font-size:13px;letter-spacing:.1em">
+      // 更多案例請至 <a href="https://www.facebook.com/groups/584508116613143" style="color:var(--accent);text-decoration:underline" target="_blank">FB 社團</a> 查看
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS
+     ============================================================ -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-label">04 / Workflow</div>
+    <h2 class="section-title">維修流程 <span class="em">/ 四步驟</span></h2>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-no">01</div>
+        <h4>私訊諮詢</h4>
+        <p>LINE / FB / 蝦皮私訊我，提供品牌型號 + 故障狀況 + 外觀照片。線上初步判斷，給你估價區間。</p>
+      </div>
+      <div class="step">
+        <div class="step-no">02</div>
+        <h4>寄送 / 親送</h4>
+        <p>確認 OK 後，可親送至工坊或宅配寄出。收件後 24 小時內回報實際檢測結果與確切報價。</p>
+      </div>
+      <div class="step">
+        <div class="step-no">03</div>
+        <h4>確認後動工</h4>
+        <p>檢測費用全免，確認價格再動工 — 不修不收。維修中如發現額外問題會主動聯繫，不會擅自加價。</p>
+      </div>
+      <div class="step">
+        <div class="step-no">04</div>
+        <h4>測試 / 寄回</h4>
+        <p>完工後 24 小時實機測試確認穩定，再寄回 / 通知取件。維修部位 90 天保固，同問題再壞免費重修。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section class="contact" id="contact">
+  <div class="section-label" style="justify-content:center;display:inline-flex">05 / Get In Touch</div>
+  <h2 class="contact-title">
+    準備好了嗎？<br>
+    <em>私訊就能開始。</em>
+  </h2>
+  <p class="contact-lead">
+    請提供：① 喇叭品牌與型號 ② 故障狀況描述 ③ 外觀照片（若有）<br>
+    收到訊息後我會盡快回覆，給你初步診斷與估價。
+  </p>
+
+  <div class="channels">
+
+    <a href="https://line.me/ti/p/~pspdan092" target="_blank" rel="noopener" class="channel">
+      <div class="channel-icon">L</div>
+      <div class="channel-name">// LINE</div>
+      <div class="channel-handle">pspdan092</div>
+      <div class="channel-desc">最快回覆 · 可傳照片影片</div>
+    </a>
+
+    <a href="https://www.facebook.com/groups/584508116613143" target="_blank" rel="noopener" class="channel">
+      <div class="channel-icon">f</div>
+      <div class="channel-name">// FACEBOOK 社團</div>
+      <div class="channel-handle">藍芽喇叭維修</div>
+      <div class="channel-desc">查看更多維修日誌</div>
+    </a>
+
+    <a href="https://shopee.tw/pspdan092" target="_blank" rel="noopener" class="channel">
+      <div class="channel-icon">S</div>
+      <div class="channel-name">// SHOPEE 賣場</div>
+      <div class="channel-handle">蝦皮原賣場</div>
+      <div class="channel-desc">下單付款 · 評價可查</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span>◉</span> 彎彎腰維修 / REPAIR</div>
+      <p class="footer-desc">
+        藍芽喇叭與真無線耳機專業維修工坊<br>
+        累積 3000+ 筆維修紀錄 · 涵蓋 280 種型號<br>
+        原為蝦皮與 FB 社團長期信賴維修商
+      </p>
+    </div>
+    <div>
+      <h4>// 聯絡管道</h4>
+      <ul>
+        <li><a href="https://line.me/ti/p/~pspdan092" target="_blank">LINE (pspdan092)</a></li>
+        <li><a href="https://www.facebook.com/groups/584508116613143" target="_blank">Facebook 社團</a></li>
+        <li><a href="https://shopee.tw/pspdan092" target="_blank">Shopee 賣場</a></li>
+        <li>☏ 0900-000-000</li>
+      </ul>
+    </div>
+    <div>
+      <h4>// 營業時間</h4>
+      <ul>
+        <li>週一至週五</li>
+        <li>09:00 — 21:00</li>
+        <li>假日送件再聯繫</li>
+        <li style="color:var(--accent)">線上私訊全天候</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 彎彎腰維修 · ALL RIGHTS RESERVED</span>
+    <span>// MADE FOR THE SOUND THAT MATTERS</span>
+  </div>
+</footer>
+
+<!-- ============================================================
+     浮動 CTA
+     ============================================================ -->
+<div class="float-cta">
+  <a href="https://line.me/ti/p/~pspdan092" target="_blank" rel="noopener" class="float-btn line" title="LINE 私訊">L</a>
+  <a href="https://www.facebook.com/groups/584508116613143" target="_blank" rel="noopener" class="float-btn fb" title="FB 社團">f</a>
+  <a href="https://shopee.tw/pspdan092" target="_blank" rel="noopener" class="float-btn shopee" title="蝦皮賣場">蝦</a>
+</div>
+
+<script>
+  // 卷動到區塊時微入場動畫
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.1});
+  document.querySelectorAll('.brand-card,.service,.case,.step,.channel,.stat').forEach((el,i)=>{
+    el.style.opacity='0';
+    el.style.transform='translateY(24px)';
+    el.style.transition='opacity .6s cubic-bezier(.2,.8,.2,1) '+(i%6*60)+'ms, transform .6s cubic-bezier(.2,.8,.2,1) '+(i%6*60)+'ms';
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
