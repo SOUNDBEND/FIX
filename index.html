@@ -421,8 +421,12 @@
     margin-bottom:20px;position:relative;overflow:hidden;
     display:flex;align-items:center;justify-content:center;
   }
-  /* 佔位圖視覺（SVG 圖案） */
   .case-img svg{width:100%;height:100%;display:block}
+  .case-img img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .case:hover .case-img img{transform:scale(1.05)}
   .case-tag{
     position:absolute;top:12px;left:12px;z-index:2;
     background:var(--accent);color:#1a0e07;
@@ -979,15 +983,7 @@
       <div class="case">
         <div class="case-img">
           <span class="case-tag">充電迴路</span>
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <defs><pattern id="g1" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 20L20 0M-5 5L5 -5M15 25L25 15" stroke="#ff5e1a" stroke-width="1" opacity=".25"/></pattern></defs>
-            <rect width="400" height="300" fill="#1a1815"/>
-            <rect width="400" height="300" fill="url(#g1)"/>
-            <rect x="120" y="100" width="160" height="100" rx="8" fill="#0e0d0b" stroke="#ff5e1a" stroke-width="2"/>
-            <circle cx="155" cy="135" r="6" fill="#ff5e1a"/>
-            <rect x="180" y="128" width="80" height="14" fill="#2a2722" stroke="#ff5e1a" stroke-width="1"/>
-            <text x="200" y="180" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="13" font-weight="700">EMBERTON</text>
-          </svg>
+          <img src="images/emberton.jpg" alt="Marshall Emberton 充電迴路故障維修" loading="lazy">
         </div>
         <div class="case-meta"><span>CASE · MARSHALL</span><span>主力品項</span></div>
         <h3 class="case-title">Marshall Emberton 充電迴路故障</h3>
@@ -1000,16 +996,8 @@
       <!-- CASE 02 -->
       <div class="case">
         <div class="case-img">
-          <span class="case-tag">換電池</span>
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#1a1815"/>
-            <g stroke="#ff5e1a" stroke-width="1" fill="none" opacity=".3">
-              <circle cx="200" cy="150" r="120"/><circle cx="200" cy="150" r="90"/><circle cx="200" cy="150" r="60"/>
-            </g>
-            <ellipse cx="200" cy="150" rx="55" ry="80" fill="#0e0d0b" stroke="#ff5e1a" stroke-width="2"/>
-            <ellipse cx="200" cy="150" rx="38" ry="62" fill="none" stroke="#ff5e1a" stroke-width="1" opacity=".7"/>
-            <text x="200" y="155" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="11" font-weight="700">REVOLVE+</text>
-          </svg>
+          <span class="case-tag">電池故障</span>
+          <img src="images/revolve.jpg" alt="Bose Revolve+ 電池故障維修" loading="lazy">
         </div>
         <div class="case-meta"><span>CASE · BOSE</span><span>高頻案件</span></div>
         <h3 class="case-title">Bose Revolve+ 電池故障</h3>
@@ -1023,17 +1011,7 @@
       <div class="case">
         <div class="case-img">
           <span class="case-tag">耳機電池</span>
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#1a1815"/>
-            <g stroke="#ff5e1a" stroke-width=".5" opacity=".3">
-              <path d="M0 100H400M0 200H400"/>
-            </g>
-            <ellipse cx="155" cy="150" rx="20" ry="28" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
-            <rect x="148" y="170" width="14" height="50" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
-            <ellipse cx="245" cy="150" rx="20" ry="28" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
-            <rect x="238" y="170" width="14" height="50" fill="#f0ebe1" stroke="#ff5e1a" stroke-width="1.5"/>
-            <text x="200" y="265" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="11" font-weight="700">AIRPODS</text>
-          </svg>
+          <img src="images/airpods.jpg" alt="AirPods 雙耳電池更換" loading="lazy">
         </div>
         <div class="case-meta"><span>CASE · AIRPODS</span><span>276 次經驗</span></div>
         <h3 class="case-title">AirPods 雙耳電池更換</h3>
@@ -1046,21 +1024,12 @@
       <!-- CASE 04 -->
       <div class="case">
         <div class="case-img">
-          <span class="case-tag">破音修復</span>
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#1a1815"/>
-            <g fill="none" stroke="#ff5e1a" stroke-width="1.5">
-              <path d="M30 150L60 130L90 170L120 100L150 200L180 80L210 220L240 90L270 210L300 110L330 190L360 140"/>
-            </g>
-            <circle cx="200" cy="150" r="60" fill="none" stroke="#ff5e1a" stroke-width="2"/>
-            <circle cx="200" cy="150" r="40" fill="none" stroke="#ff5e1a" stroke-width="1" opacity=".6"/>
-            <circle cx="200" cy="150" r="20" fill="#ff5e1a" opacity=".3"/>
-            <text x="200" y="155" text-anchor="middle" fill="#f0ebe1" font-family="JetBrains Mono" font-size="10" font-weight="700">DRIVER</text>
-          </svg>
+          <span class="case-tag">電池故障</span>
+          <img src="images/KEF.jpg" alt="KEF MUO 電池故障維修" loading="lazy">
         </div>
-        <div class="case-meta"><span>CASE #2024-126</span><span>2025.01</span></div>
-        <h3 class="case-title">Marshall Emberton 喇叭單體更換</h3>
-        <p class="case-desc">大音量時左聲道破音，拆機後確認單體音圈變形。換上原規格單體，音質與低音量還原至出廠水準。</p>
+        <div class="case-meta"><span>CASE · KEF MUO</span><span>124 次經驗</span></div>
+        <h3 class="case-title">KEF MUO 電池故障</h3>
+        <p class="case-desc">英國 KEF 旗艦藍芽喇叭，電池故障時會出現充電閃紅燈、無法開機的症狀。拆解金屬一體成形機身後更換電池，恢復正常充電與開機功能。</p>
         <div class="case-footer">
           <span>WORK · 2 HOURS</span><span class="status">● COMPLETED</span>
         </div>
@@ -1069,23 +1038,14 @@
       <!-- CASE 05 -->
       <div class="case">
         <div class="case-img">
-          <span class="case-tag">進水搶救</span>
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#1a1815"/>
-            <g fill="#ff5e1a" opacity=".7">
-              <circle cx="100" cy="80" r="3"/><circle cx="180" cy="60" r="2"/><circle cx="260" cy="90" r="4"/>
-              <circle cx="340" cy="70" r="2"/><circle cx="140" cy="130" r="3"/><circle cx="280" cy="140" r="2"/>
-              <circle cx="80" cy="200" r="4"/><circle cx="200" cy="220" r="3"/><circle cx="320" cy="210" r="2"/>
-            </g>
-            <path d="M150 150 Q200 100 250 150 T350 150" fill="none" stroke="#7fb069" stroke-width="2"/>
-            <text x="200" y="270" text-anchor="middle" fill="#7fb069" font-family="JetBrains Mono" font-size="11" font-weight="700">RECOVERED</text>
-          </svg>
+          <span class="case-tag">獨家解鎖</span>
+          <img src="images/QC.jpg" alt="Bose QC 藍芽耳機 電池更換解鎖" loading="lazy">
         </div>
-        <div class="case-meta"><span>CASE #2024-138</span><span>2025.02</span></div>
-        <h3 class="case-title">JBL Flip 5 海水浸泡搶救</h3>
-        <p class="case-desc">客戶於海邊不慎落水，送修時已無法開機。主機板超音波清洗 + 氧化點修補，最終成功救回正常運作。</p>
+        <div class="case-meta"><span>CASE · BOSE QC</span><span>獨家技術</span></div>
+        <h3 class="case-title">Bose QC 藍芽耳機 電池故障</h3>
+        <p class="case-desc">Bose QC 系列藍芽耳機電池老化後，系統會直接鎖機、無法開機使用。本工坊提供獨家解鎖與電池更換服務，原廠處理不到的疑難雜症也能修復。</p>
         <div class="case-footer">
-          <span>WORK · 6 HOURS</span><span class="status">● COMPLETED</span>
+          <span>WORK · 3 HOURS</span><span class="status">● COMPLETED</span>
         </div>
       </div>
 
@@ -1093,16 +1053,7 @@
       <div class="case">
         <div class="case-img">
           <span class="case-tag">藍芽模組</span>
-          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            <rect width="400" height="300" fill="#1a1815"/>
-            <g stroke="#ff5e1a" stroke-width="2" fill="none">
-              <circle cx="200" cy="150" r="80" opacity=".3"/>
-              <circle cx="200" cy="150" r="55" opacity=".5"/>
-              <circle cx="200" cy="150" r="30" opacity=".8"/>
-            </g>
-            <path d="M195 110L195 190L220 165L180 135L220 105L195 130" fill="none" stroke="#ff5e1a" stroke-width="2.5"/>
-            <text x="200" y="260" text-anchor="middle" fill="#ff5e1a" font-family="JetBrains Mono" font-size="10" font-weight="700">BT 5.0 MODULE</text>
-          </svg>
+          <img src="images/XB41.jpg" alt="Sony XB41 藍芽連線異常維修" loading="lazy">
         </div>
         <div class="case-meta"><span>CASE #2025-014</span><span>2025.03</span></div>
         <h3 class="case-title">Sony XB41 藍芽連線異常</h3>
